@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DatabaseAnalyzer.SQL_Queries
+namespace DatabaseAnalyzer.DatabaseActions
 {
     public abstract class SQLQuery<T>
     {

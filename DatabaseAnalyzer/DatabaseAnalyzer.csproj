@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DatabaseActions\Queries\SQLQueriesClass.cs" />
     <Compile Include="Main\DatabaseConnClass.cs" />
     <Compile Include="Models\ActionResultStruct.cs" />
     <Compile Include="Models\ColumnClass.cs" />
@@ -54,11 +55,11 @@
     <Compile Include="Models\TypeClass.cs" />
     <Compile Include="Models\ViewClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQL_Queries\ExecutableQueryClass.cs" />
-    <Compile Include="SQL_Queries\SQLQuery.cs" />
-    <Compile Include="SQL_Queries\DataContainerQueryClass.cs" />
-    <Compile Include="SQL_Queries\UserDefinedTableTypesQueryClass.cs" />
-    <Compile Include="SQL_Queries\UserDefinedTypesQueryClass.cs" />
+    <Compile Include="DatabaseActions\ExecutableQueryClass.cs" />
+    <Compile Include="DatabaseActions\SQLQuery.cs" />
+    <Compile Include="DatabaseActions\DataContainerQueryClass.cs" />
+    <Compile Include="DatabaseActions\UserDefinedTableTypesQueryClass.cs" />
+    <Compile Include="DatabaseActions\UserDefinedTypesQueryClass.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

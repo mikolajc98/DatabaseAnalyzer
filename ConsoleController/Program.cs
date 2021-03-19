@@ -28,19 +28,19 @@ namespace ConsoleController
 
 
             //done
-            DatabaseAnalyzer.SQL_Queries.DataContainerQuery dcq = new DatabaseAnalyzer.SQL_Queries.DataContainerQuery();
+            DatabaseAnalyzer.DatabaseActions.DataContainerQuery dcq = new DatabaseAnalyzer.DatabaseActions.DataContainerQuery();
             List<DatabaseAnalyzer.Models.DataContainer> databaseDataContainers = (List<DatabaseAnalyzer.Models.DataContainer>)dcq.ExecuteAndReturn();
 
             //done
-            DatabaseAnalyzer.SQL_Queries.ExecutableQuery eq = new DatabaseAnalyzer.SQL_Queries.ExecutableQuery();
+            DatabaseAnalyzer.DatabaseActions.ExecutableQuery eq = new DatabaseAnalyzer.DatabaseActions.ExecutableQuery();
             List<DatabaseAnalyzer.Models.Executable> databaseExecutables = (List<DatabaseAnalyzer.Models.Executable>)eq.ExecuteAndReturn();
 
             //done
-            DatabaseAnalyzer.SQL_Queries.UserDefinedTypesQuery udt = new DatabaseAnalyzer.SQL_Queries.UserDefinedTypesQuery();
+            DatabaseAnalyzer.DatabaseActions.UserDefinedTypesQuery udt = new DatabaseAnalyzer.DatabaseActions.UserDefinedTypesQuery();
             List<DatabaseAnalyzer.Models.Type> userTypes = (List<DatabaseAnalyzer.Models.Type>)udt.ExecuteAndReturn();
 
             //done
-            DatabaseAnalyzer.SQL_Queries.UserDefinedTableTypesQuery udtt = new DatabaseAnalyzer.SQL_Queries.UserDefinedTableTypesQuery();
+            DatabaseAnalyzer.DatabaseActions.UserDefinedTableTypesQuery udtt = new DatabaseAnalyzer.DatabaseActions.UserDefinedTableTypesQuery();
             List<DatabaseAnalyzer.Models.Table> userTableTypes = (List<DatabaseAnalyzer.Models.Table>)udtt.ExecuteAndReturn();
 
             WriteStatsToConsole(databaseDataContainers, databaseExecutables, userTypes, userTableTypes);
