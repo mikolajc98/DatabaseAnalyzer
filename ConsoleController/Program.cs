@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DatabaseAnalyzer.Models;
 
 namespace ConsoleController
 {
@@ -11,7 +10,7 @@ namespace ConsoleController
         static void Main(string[] args)
         {
             // you have to provide program with 4 parameters in this order: "server name" "database name" "user name" "user password"
-             string[] data = LoadArguments(args);
+            string[] data = LoadArguments(args);
 
             string
                 server = data[0],
@@ -25,8 +24,8 @@ namespace ConsoleController
                 DatabaseAnalyzer.Main.Database.InitializeConnection(server, db);
 
             else
-                DatabaseAnalyzer.Main.Database.InitializeConnection(server,db, userName, userPwd);
-                
+                DatabaseAnalyzer.Main.Database.InitializeConnection(server, db, userName, userPwd);
+
 
             //done
             DatabaseAnalyzer.SQL_Queries.DataContainerQuery dcq = new DatabaseAnalyzer.SQL_Queries.DataContainerQuery();
@@ -44,6 +43,30 @@ namespace ConsoleController
             DatabaseAnalyzer.SQL_Queries.UserDefinedTableTypesQuery udtt = new DatabaseAnalyzer.SQL_Queries.UserDefinedTableTypesQuery();
             List<DatabaseAnalyzer.Models.Table> userTableTypes = (List<DatabaseAnalyzer.Models.Table>)udtt.ExecuteAndReturn();
 
+            WriteStatsToConsole(databaseDataContainers, databaseExecutables, userTypes, userTableTypes);
+
+            Console.ReadLine();
+        }
+
+
+        private static string[] LoadArguments(string[] args)
+        {
+            if (args.Length != 4)
+            {
+                throw new Exception($"Parameter not provided!");
+            }
+
+            string[] result = new string[args.Length];
+
+
+            for (int i = 0; i < args.Length; i++)
+                result[i] = args[i];
+
+            return result;
+        }
+
+        private static void WriteStatsToConsole(List<DataContainer> databaseDataContainers, List<Executable> databaseExecutables, List<DatabaseAnalyzer.Models.Type> userTypes, List<Table> userTableTypes)
+        {
             Console.WriteLine($"Scanning ... Server:{DatabaseAnalyzer.Main.Database.Server} DB:{DatabaseAnalyzer.Main.Database.DatabaseName}");
 
             Console.WriteLine();
@@ -51,11 +74,11 @@ namespace ConsoleController
             Console.WriteLine();
             Console.WriteLine($"Found {databaseDataContainers.Count(x => x is DatabaseAnalyzer.Models.Table)} Tables and {databaseDataContainers.Count(y => y is DatabaseAnalyzer.Models.View)} Views");
 
-            foreach(var dt in databaseDataContainers)
+            foreach (var dt in databaseDataContainers)
             {
                 Console.WriteLine();
                 Console.WriteLine($"{dt.SchemaDetails.Name}.{dt.Name} ({dt.TypeStr})");
-                foreach(var col in dt.Columns)
+                foreach (var col in dt.Columns)
                 {
                     string defValue = string.IsNullOrEmpty(col.TypeDetails.DefaultValue) ? "" : $"[{col.TypeDetails.DefaultValue}]";
                     Console.WriteLine($"\t{col.Name} {col.TypeDetails.Name} ({col.TypeDetails.Precision}) {defValue}");
@@ -67,11 +90,11 @@ namespace ConsoleController
             Console.WriteLine();
             Console.WriteLine($"Found {databaseExecutables.Count(x => x is DatabaseAnalyzer.Models.Procedure)} Procedures and {databaseExecutables.Count(x => x is DatabaseAnalyzer.Models.Function)} Functions");
 
-            foreach(var exec in databaseExecutables)
+            foreach (var exec in databaseExecutables)
             {
                 Console.WriteLine();
                 Console.WriteLine($"{exec.SchemaDetails.Name}.{exec.Name} ({exec.TypeStr})");
-                foreach(var param in exec.Params)
+                foreach (var param in exec.Params)
                 {
                     string defValue = string.IsNullOrEmpty(param.TypeDetails.DefaultValue) ? "" : $"[{param.TypeDetails.DefaultValue}]";
                     Console.WriteLine($"\t{param.Name} {param.TypeDetails.Name} ({param.TypeDetails.Precision}) {defValue}");
@@ -83,7 +106,7 @@ namespace ConsoleController
             Console.WriteLine();
             Console.WriteLine($"Found {userTypes.Count()} User-defined types");
 
-            foreach(var t in userTypes)
+            foreach (var t in userTypes)
             {
                 string defValue = string.IsNullOrEmpty(t.DefaultValue) ? "" : $"[{t.DefaultValue}]";
                 Console.WriteLine($"\t{t.Name} ({t.Precision}) {defValue}");
@@ -103,23 +126,6 @@ namespace ConsoleController
                     Console.WriteLine($"\t{col.Name} {col.TypeDetails.Name} ({col.TypeDetails.Precision})");
                 }
             }
-            Console.ReadLine();
-        }
-
-        private static string[] LoadArguments(string[] args)
-        {
-            if(args.Length != 4)
-            {
-                throw new Exception($"Parameter not provided!");
-            }
-
-            string[] result = new string[args.Length];
-
-
-            for (int i = 0; i < args.Length; i++)
-                result[i] = args[i];
-
-            return result;
         }
     }
 }
