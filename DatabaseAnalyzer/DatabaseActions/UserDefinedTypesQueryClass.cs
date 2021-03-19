@@ -8,7 +8,7 @@ namespace DatabaseAnalyzer.DatabaseActions
 {
     public class UserDefinedTypesQuery : SQLQuery<Models.Type>
     {
-        private readonly string SQLScript = 
+        private readonly string SQLScript = Queries.SQLQueries.Query_UserDefinedTypes;
 
         public override IEnumerable<Models.Type> ExecuteAndReturn()
         {
