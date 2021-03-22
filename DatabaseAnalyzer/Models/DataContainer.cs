@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAnalyzer.Models
 {
-    public class DataContainer
+    abstract public class DataContainer
     {
         public string Name { get; private set; }
         public Schema SchemaDetails { get; private set; }
@@ -19,7 +19,7 @@ namespace DatabaseAnalyzer.Models
             }
         }
 
-        public DataContainer(string Name, Schema Schema, IEnumerable<Column> Columns)
+        internal DataContainer(string Name, Schema Schema, IEnumerable<Column> Columns)
         {
             this.Name = Name;
             this.SchemaDetails = Schema;

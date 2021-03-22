@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DatabaseAnalyzer.Models
 {
-    public class Executable
+    public abstract class Executable
     {
         public string Name { get; private set; }
         public Schema SchemaDetails { get; private set; }
@@ -19,7 +19,7 @@ namespace DatabaseAnalyzer.Models
             }
         }
 
-        public Executable(string name, Schema schema, IEnumerable<Parameter> parameters)
+        internal Executable(string name, Schema schema, IEnumerable<Parameter> parameters)
         {
             this.Name = name;
             this.SchemaDetails = schema;
