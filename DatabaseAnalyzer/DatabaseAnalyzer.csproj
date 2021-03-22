@@ -45,7 +45,7 @@
     <Compile Include="Main\DatabaseConnClass.cs" />
     <Compile Include="Models\ActionResultStruct.cs" />
     <Compile Include="Models\ColumnClass.cs" />
-    <Compile Include="Models\DataContainer.cs" />
+    <Compile Include="Models\DataContainerClass.cs" />
     <Compile Include="Models\ExecutableClass.cs" />
     <Compile Include="Models\FunctionClass.cs" />
     <Compile Include="Models\ParametersClass.cs" />
