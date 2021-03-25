@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DatabaseActions\Queries\SQLQueriesClass.cs" />
     <Compile Include="Main\DatabaseConnClass.cs" />
+    <Compile Include="Main\ReportClass.cs" />
     <Compile Include="Models\ActionResultStruct.cs" />
     <Compile Include="Models\ColumnClass.cs" />
     <Compile Include="Models\DataContainerClass.cs" />

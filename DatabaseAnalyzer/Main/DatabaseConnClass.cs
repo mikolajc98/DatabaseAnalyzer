@@ -9,7 +9,7 @@ namespace DatabaseAnalyzer.Main
     {
         private static SqlConnection Connection;
         private static SqlCommand Command;
-        private static bool IsInitialized { get; set; } = false;
+        public static bool IsInitialized { get; private set; }
 
         public static string DatabaseName
         {
