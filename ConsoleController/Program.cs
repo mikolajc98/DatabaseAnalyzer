@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using DatabaseAnalyzer.Models;
 
@@ -27,23 +28,37 @@ namespace ConsoleController
                 DatabaseAnalyzer.Main.Database.InitializeConnection(server, db, userName, userPwd);
 
 
-            //done
+            string folderName = $"_{DatabaseAnalyzer.Main.Database.DatabaseName} scan report {DateTime.Now:yyyy-MM-dd}";
+
+            string reportPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory),folderName);
+
+            DatabaseAnalyzer.Main.Report rep = new DatabaseAnalyzer.Main.Report(reportPath,true);
+
+            Stopwatch sw = Stopwatch.StartNew();
+            rep.GenerateAndSaveReport();
+            sw.Stop();
+
+            Console.WriteLine($"Report created in {sw.Elapsed.Hours:00}:{sw.Elapsed.Minutes:00}:{sw.Elapsed.Seconds:00}.{sw.Elapsed.Milliseconds:000}");
+            /*
+
             DatabaseAnalyzer.DatabaseActions.DataContainerQuery dcq = new DatabaseAnalyzer.DatabaseActions.DataContainerQuery();
             List<DatabaseAnalyzer.Models.DataContainer> databaseDataContainers = (List<DatabaseAnalyzer.Models.DataContainer>)dcq.ExecuteAndReturn();
 
-            //done
+
             DatabaseAnalyzer.DatabaseActions.ExecutableQuery eq = new DatabaseAnalyzer.DatabaseActions.ExecutableQuery();
             List<DatabaseAnalyzer.Models.Executable> databaseExecutables = (List<DatabaseAnalyzer.Models.Executable>)eq.ExecuteAndReturn();
 
-            //done
+
             DatabaseAnalyzer.DatabaseActions.UserDefinedTypesQuery udt = new DatabaseAnalyzer.DatabaseActions.UserDefinedTypesQuery();
             List<DatabaseAnalyzer.Models.Type> userTypes = (List<DatabaseAnalyzer.Models.Type>)udt.ExecuteAndReturn();
 
-            //done
+
             DatabaseAnalyzer.DatabaseActions.UserDefinedTableTypesQuery udtt = new DatabaseAnalyzer.DatabaseActions.UserDefinedTableTypesQuery();
             List<DatabaseAnalyzer.Models.Table> userTableTypes = (List<DatabaseAnalyzer.Models.Table>)udtt.ExecuteAndReturn();
 
             WriteStatsToConsole(databaseDataContainers, databaseExecutables, userTypes, userTableTypes);
+
+            */
 
             Console.ReadLine();
         }
