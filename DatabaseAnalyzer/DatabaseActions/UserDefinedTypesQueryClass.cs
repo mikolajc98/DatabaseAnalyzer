@@ -24,10 +24,11 @@ namespace DatabaseAnalyzer.DatabaseActions
             for(int i = 0; i < data.Rows.Count; i++)
             {
                 string name = data.Rows[i]["TYPE_NAME"].ToString();
+                string baseName = data.Rows[i]["BASE_TYPE_NAME"].ToString();
                 string precision = data.Rows[i]["PRECISION"].ToString();
                 string defValue = data.Rows[i]["DEFAULT_VALUE"].ToString();
 
-                Models.Type type = new Models.Type(name, precision, defValue);
+                Models.Type type = new Models.Type(name, baseName, precision, defValue);
                 result.Add(type);
             }
 
