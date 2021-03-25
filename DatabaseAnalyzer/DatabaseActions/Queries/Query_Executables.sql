@@ -42,3 +42,5 @@ LEFT JOIN PF ON PF.object_id = PARAMS.object_id
 JOIN sys.schemas SCHMS ON PF.schema_id = SCHMS.schema_id
 JOIN sys.types SYSTYPE ON PARAMS.system_type_id = SYSTYPE.system_type_id AND PARAMS.system_type_id = SYSTYPE.user_type_id
 LEFT JOIN sys.types USRTYPE ON PARAMS.system_type_id = USRTYPE.system_type_id AND PARAMS.user_type_id = USRTYPE.user_type_id
+
+ORDER BY PF.object_id

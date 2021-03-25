@@ -45,3 +45,5 @@ JOIN sys.schemas SCHMS ON TABLEVIEW.schema_id = SCHMS.schema_id
 JOIN sys.types SYSTYPE ON COLS.system_type_id = SYSTYPE.system_type_id AND COLS.system_type_id = SYSTYPE.user_type_id
 LEFT JOIN sys.types USRTYPE ON COLS.system_type_id = USRTYPE.system_type_id AND COLS.user_type_id = USRTYPE.user_type_id    
 LEFT JOIN sys.default_constraints DEFVALUE ON COLS.default_object_id = DEFVALUE.object_id
+
+ORDER BY TABLEVIEW.object_id

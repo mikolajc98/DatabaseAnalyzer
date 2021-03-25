@@ -18,3 +18,5 @@ JOIN sys.schemas SCHMS ON USRTPS.schema_id = SCHMS.schema_id
 JOIN sys.types SYSTPS ON USRTPS.system_type_id = SYSTPS.system_type_id AND USRTPS.system_type_id = SYSTPS.user_type_id 
 LEFT JOIN sys.default_constraints DEFVAL ON USRTPS.default_object_id = DEFVAL.object_id
 WHERE USRTPS.is_table_type = 0 AND USRTPS.is_user_defined = 1
+
+ORDER BY USRTPS.name
